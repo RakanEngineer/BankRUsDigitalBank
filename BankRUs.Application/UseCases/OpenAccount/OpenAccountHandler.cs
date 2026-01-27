@@ -1,4 +1,5 @@
 ﻿using BankRUs.Application.Identity;
+using BankRUs.Application.Interfaces;
 using BankRUs.Application.Repository;
 using BankRUs.Domain.Entities;
 
@@ -8,21 +9,25 @@ public class OpenAccountHandler
 {
     private readonly IIdentityService _identityService;
     private readonly IBankAccountRepository _bankAccountRepository;
+    private readonly IEmailService _emailService;
 
     public OpenAccountHandler(
         IIdentityService identityService,
-        IBankAccountRepository bankAccountRepository
+        IBankAccountRepository bankAccountRepository,
+        IEmailService emailService
        )
     {
         _identityService = identityService;
         _bankAccountRepository = bankAccountRepository;
+        _emailService = emailService;
     }
 
     public async Task<OpenAccountResult> HandleAsync(OpenAccountCommand command)
     {
         // TODO: Skapa användarkonto (ASP.NET Core Identity)
         // Delegera till infrastructure
-        var createUserResult = await _identityService.CreateUserAsync(new CreateUserRequest(
+        var createUserResult = await _identityService.CreateUserAsync(
+            new CreateUserRequest(
             FirstName: command.FirstName,
             LastName: command.LastName,
             SocialSecurityNumber: command.SocialSecurityNumber,
@@ -45,7 +50,10 @@ public class OpenAccountHandler
         // TODO: Skicka välkomstmail till kund
         // Delegera till infrastructure
         // _emailSender.Send("Ditt bankkonto är nu redo!");
-        
+        await _emailService.SendWelcomeEmailAsync(
+            command.Email,
+            command.FirstName
+        );
 
         return new OpenAccountResult(UserId: createUserResult.UserId);
     }

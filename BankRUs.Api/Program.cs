@@ -1,5 +1,7 @@
 using BankRUs.Application.Identity;
+using BankRUs.Application.Interfaces;
 using BankRUs.Application.UseCases.OpenAccount;
+using BankRUs.Intrastructure.Email;
 using BankRUs.Intrastructure.Identity;
 using BankRUs.Intrastructure.Persistance;
 using BankRUs.Intrastructure.Persistance.Repositories;
@@ -39,6 +41,12 @@ builder.Services
   .AddIdentity<ApplicationUser, IdentityRole<Guid>>()
   .AddEntityFrameworkStores<ApplicationDbContext>()
   .AddDefaultTokenProviders();
+
+builder.Services.Configure<SmtpSettings>(
+    builder.Configuration.GetSection("Smtp")
+);
+
+builder.Services.AddScoped<IEmailService, SmtpEmailService>();
 
 var app = builder.Build();
 
