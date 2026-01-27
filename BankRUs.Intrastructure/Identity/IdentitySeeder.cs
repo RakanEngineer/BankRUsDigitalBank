@@ -10,19 +10,19 @@ public static class IdentitySeeder
     {
         // Seeda data applikation behöver för att fungera
         // däribland roller (Customer, CustomerService, Admin, ...)
-        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
 
         await SeedRolesAsync(roleManager);
     }
 
-    private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
+    private static async Task SeedRolesAsync(RoleManager<IdentityRole<Guid>> roleManager)
     {
         // "Customer", "CustomerService"
         foreach (var role in Roles.All)
         {
             if (!await roleManager.RoleExistsAsync(role))
             {
-                var result = await roleManager.CreateAsync(new IdentityRole(role));
+                var result = await roleManager.CreateAsync(new IdentityRole<Guid>(role));
 
                 if (!result.Succeeded)
                 {

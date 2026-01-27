@@ -2,7 +2,7 @@
 
 namespace BankRUs.Intrastructure.Identity;
 
-public class ApplicationUser : IdentityUser
+public class ApplicationUser : IdentityUser<Guid>
 {
     public required string FirstName { get; set; }
     public required string LastName { get; set; }

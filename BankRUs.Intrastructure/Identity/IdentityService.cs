@@ -36,6 +36,6 @@ public class IdentityService : IIdentityService
 
         await _userManager.AddToRoleAsync(user, Roles.Customer);
 
-        return new CreateUserResult(UserId: Guid.Parse(user.Id));
+        return new CreateUserResult(UserId: user.Id);
     }
 }
