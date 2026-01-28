@@ -1,6 +1,7 @@
 ﻿using BankRUs.Application.Identity;
 using BankRUs.Application.Interfaces;
 using BankRUs.Application.Repository;
+using BankRUs.Application.UseCases.OpenBankAccount;
 using BankRUs.Domain.Entities;
 
 namespace BankRUs.Application.UseCases.OpenAccount;
@@ -39,7 +40,7 @@ public class OpenAccountHandler
         // TODO: Skapa bankkonto
         // Delegera till infrastructure
         var userId = createUserResult.UserId;
-        var accountNumber = GenerateAccountNumber();
+        var accountNumber = AccountNumberGenerator.Generate();
 
         var bankAccount = new BankAccount(
             userId: userId,
@@ -56,9 +57,5 @@ public class OpenAccountHandler
         );
 
         return new OpenAccountResult(UserId: createUserResult.UserId);
-    }
-    private static string GenerateAccountNumber()
-    {
-        return $"SE-{Random.Shared.Next(10000000, 99999999)}";
-    }
+    }   
 }

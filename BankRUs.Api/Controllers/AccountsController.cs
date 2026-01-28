@@ -1,7 +1,9 @@
 ﻿using BankRUs.Api.Dtos.Accounts;
 using BankRUs.Application.UseCases.OpenAccount;
+using BankRUs.Application.UseCases.OpenBankAccount;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
+using System.Reflection.Metadata;
 
 namespace BankRUs.Api.Controllers;
 
@@ -10,10 +12,12 @@ namespace BankRUs.Api.Controllers;
 public class AccountsController : ControllerBase
 {
     private readonly OpenAccountHandler _openAccountHandler;
+    private readonly OpenBankAccountHandler _handler;
 
-    public AccountsController(OpenAccountHandler openAccountHandler)
+    public AccountsController(OpenAccountHandler openAccountHandler, OpenBankAccountHandler handler)
     {
         _openAccountHandler = openAccountHandler;
+        _handler = handler;
     }
 
     // POST /api/accounts (Endpoint /  API endpoint)
@@ -33,6 +37,12 @@ public class AccountsController : ControllerBase
 
         // Returnera 201 Created
         return Created(string.Empty, response);
+    }
+    [HttpPost("/api/bank-accounts")]
+    public async Task<IActionResult> OpenBankAccount(OpenBankAccountCommand command)
+    {
+        await _handler.Handle(command);
+        return Ok();
     }
 
     private static bool IsValidLuhn(string digits)

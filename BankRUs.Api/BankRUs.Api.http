@@ -12,3 +12,11 @@ Content-Type: application/json
   "email": "jane@doe.com"
 }
 
+### Open Bank Account
+
+POST https://localhost:8000/api/bank-accounts
+Content-Type: application/json
+
+{
+  "userId": "d11d286d-958a-4af4-e9b4-08de5e44902d"
+}
