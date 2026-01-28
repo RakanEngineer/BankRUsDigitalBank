@@ -23,6 +23,9 @@ public class ApplicationDbContext
         {
             entity.Property(e => e.Balance)
                   .HasPrecision(18, 2); // 💰 Decimal precision for monetary values
+            entity
+                .HasIndex(b => b.AccountNumber)
+                .IsUnique();
         });
     }
 }

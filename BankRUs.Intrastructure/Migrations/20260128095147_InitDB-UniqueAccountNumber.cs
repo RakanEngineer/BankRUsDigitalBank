@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BankRUs.Intrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitDBUniqueAccountNumber : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -59,7 +59,8 @@ namespace BankRUs.Intrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AccountNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AccountNumber = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     Balance = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -212,6 +213,12 @@ namespace BankRUs.Intrastructure.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BankAccounts_AccountNumber",
+                table: "BankAccounts",
+                column: "AccountNumber",
+                unique: true);
         }
 
         /// <inheritdoc />

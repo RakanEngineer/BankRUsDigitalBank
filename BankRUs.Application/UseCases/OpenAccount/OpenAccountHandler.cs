@@ -44,7 +44,8 @@ public class OpenAccountHandler
 
         var bankAccount = new BankAccount(
             userId: userId,
-            accountNumber: accountNumber
+            accountNumber: accountNumber,
+            name: "Standardkonto"
         );
 
         await _bankAccountRepository.AddAsync(bankAccount);

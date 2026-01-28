@@ -20,7 +20,8 @@ namespace BankRUs.Application.UseCases.OpenBankAccount
 
             var account = new BankAccount(
                 command.UserId,
-                accountNumber
+                accountNumber,
+                "Standardkonto"
             );
 
             await _repo.AddAsync(account);
