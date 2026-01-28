@@ -1,9 +1,6 @@
 ﻿using BankRUs.Application.Repository;
 using BankRUs.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BankRUs.Intrastructure.Persistance.Repositories
 {
@@ -16,9 +13,9 @@ namespace BankRUs.Intrastructure.Persistance.Repositories
             _context = context;
         }
 
-        public async Task AddAsync(BankAccount account)
+        public async Task AddAsync(BankAccount bankAccount)
         {
-            _context.BankAccounts.Add(account);
+            _context.BankAccounts.Add(bankAccount);
             await _context.SaveChangesAsync();
         }
 

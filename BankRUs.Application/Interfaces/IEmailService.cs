@@ -7,5 +7,7 @@ namespace BankRUs.Application.Interfaces
     public interface IEmailService
     {
         Task SendWelcomeEmailAsync(string toEmail, string name);
+        Task SendAccountCreatedEmailAsync(string toEmail, string accountNumber);
+
     }
 }

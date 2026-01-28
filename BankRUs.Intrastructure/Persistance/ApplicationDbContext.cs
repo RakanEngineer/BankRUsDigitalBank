@@ -3,6 +3,7 @@ using BankRUs.Intrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace BankRUs.Intrastructure.Persistance;
 
@@ -27,6 +28,14 @@ public class ApplicationDbContext
                 .HasIndex(b => b.AccountNumber)
                 .IsUnique();
         });
+
+        //builder.Entity<ApplicationUser>()
+        //    .HasIndex(u => u.SocialSecurityNumber)
+        //    .IsUnique();
+
+        //builder.Entity<ApplicationUser>()
+        //   .HasIndex(u => u.Email)
+        //   .IsUnique();
     }
 }
 

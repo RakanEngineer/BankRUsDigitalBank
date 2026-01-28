@@ -57,6 +57,8 @@ public class OpenAccountHandler
             command.FirstName
         );
 
+        await _emailService.SendAccountCreatedEmailAsync(command.Email, accountNumber);
+
         return new OpenAccountResult(UserId: createUserResult.UserId);
     }   
 }

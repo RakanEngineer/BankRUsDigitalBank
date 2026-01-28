@@ -1,6 +1,7 @@
 ﻿
 using BankRUs.Application.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankRUs.Intrastructure.Identity;
 
@@ -12,7 +13,17 @@ public class IdentityService : IIdentityService
     {
         _userManager = userManager;
     }
+    //public async Task<UserDto> GetUserByIdAsync(Guid userId)
+    //{
+    //    var user = await _userManager.Users
+    //    .FirstAsync(u => u.Id == userId.ToString());
 
+    //    return new UserDto(
+    //        UserId: userId,
+    //        Email: user.Email!,
+    //        FullName: $"{user.FirstName} {user.LastName}"
+    //    );
+    //}
     public async Task<CreateUserResult> CreateUserAsync(CreateUserRequest request)
     {
         var user = new ApplicationUser

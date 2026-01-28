@@ -33,6 +33,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<OpenAccountHandler>();
 builder.Services.AddScoped<IIdentityService, IdentityService>();
 
+// Repository
 builder.Services.AddScoped<OpenBankAccountHandler>();
 builder.Services.AddScoped<IBankAccountRepository, BankAccountRepository>();
 
