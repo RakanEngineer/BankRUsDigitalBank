@@ -29,5 +29,5 @@ POST https://localhost:8000/api/bank-accounts
 Content-Type: application/json
 
 {
-  "userId": "84f4908a-9c90-4c61-6686-08de5f21bf8a"
+  "userId": "4252d408-b211-4e38-b100-08de5f26ae18"
 }

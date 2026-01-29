@@ -55,7 +55,7 @@ public class OpenAccountHandler
             name: "Standardkonto"
         );
 
-        await _bankAccountRepository.CreateBankAccount(bankAccount);
+        await _bankAccountRepository.Add(bankAccount);
         // TODO: Skicka välkomstmail till kund
         // Delegera till infrastructure
         // _emailSender.Send("Ditt bankkonto är nu redo!");
@@ -63,8 +63,12 @@ public class OpenAccountHandler
             command.Email,
             command.FirstName
         );
+        //await _emailService.SendWelcomeEmailAsync(
+        //   from: "no-reply@bankrus.com",
+        //   to: command.Email,
+        //   subject: "Ditt konto är klart",
 
-        await _emailService.SendAccountCreatedEmailAsync(command.Email, accountNumber);
+       await _emailService.SendAccountCreatedEmailAsync(command.Email, accountNumber);
 
         return new OpenAccountResult(UserId: createUserResult.UserId);
     }   

@@ -7,11 +7,11 @@ using System.Text;
 
 namespace BankRUs.Intrastructure.Email
 {
-    public class SmtpEmailService : IEmailService
+    public class FakeEmailService : IEmailService
     {
         private readonly SmtpSettings _settings;
 
-        public SmtpEmailService(IOptions<SmtpSettings> settings)
+        public FakeEmailService(IOptions<SmtpSettings> settings)
         {
             _settings = settings.Value;
         }

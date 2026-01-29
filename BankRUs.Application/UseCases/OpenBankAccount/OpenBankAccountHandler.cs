@@ -41,7 +41,7 @@ namespace BankRUs.Application.UseCases.OpenBankAccount
                 "Standardkonto"
             );
 
-            await _repo.CreateBankAccount(account);
+            await _repo.Add(account);
 
             var user = await _identityService.GetUserByIdAsync(command.UserId);
 

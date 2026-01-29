@@ -41,13 +41,13 @@ builder.Services.AddScoped<IIdentityService, IdentityService>();
 if (builder.Environment.IsDevelopment())
 {
     // Utveckling - Fake Email Service
-    builder.Services.AddScoped<IEmailService, SmtpEmailService>();
+    builder.Services.AddScoped<IEmailService, FakeEmailService>();
 }
 else
 {
     // Produktion
     //builder.Services.AddScoped<IEmailSender, EmailSender>();
-    //builder.Services.AddScoped<IEmailService, EmailSender>();
+    builder.Services.AddScoped<IEmailService, EmailService>();
 }
 
 // Repository
