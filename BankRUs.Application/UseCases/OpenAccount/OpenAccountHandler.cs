@@ -25,6 +25,15 @@ public class OpenAccountHandler
 
     public async Task<OpenAccountResult> HandleAsync(OpenAccountCommand command)
     {
+        // TODO: SocialSecurityNumber + Email ska vara UNIQUE
+        // Check if user already exists
+        if (await _identityService.UserExistsAsync(
+            command.Email,
+            command.SocialSecurityNumber))
+        {
+            throw new Exception("This user already exists.");
+        }
+        
         // TODO: Skapa användarkonto (ASP.NET Core Identity)
         // Delegera till infrastructure
         var createUserResult = await _identityService.CreateUserAsync(
@@ -34,9 +43,7 @@ public class OpenAccountHandler
             SocialSecurityNumber: command.SocialSecurityNumber,
             Email: command.Email
          ));
-
-        // TODO: SocialSecurityNumber + Email ska vara UNIQUE
-
+        
         // TODO: Skapa bankkonto
         // Delegera till infrastructure
         var userId = createUserResult.UserId;

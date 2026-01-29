@@ -49,6 +49,13 @@ public class IdentityService : IIdentityService
 
         return new CreateUserResult(UserId: user.Id);
     }
+    public async Task<bool> UserExistsAsync(string email, string socialSecurityNumber)
+    {
+        return await _userManager.Users.AnyAsync(u =>
+            u.Email == email ||
+            u.SocialSecurityNumber == socialSecurityNumber
+        );
+    }
     public async Task<UserDto> GetUserByIdAsync(Guid userId)
     {
         var user = await _userManager.Users

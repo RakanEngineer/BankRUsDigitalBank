@@ -19,8 +19,8 @@ Content-Type: application/json
 {
   "firstName": "Ja",
   "lastName": "Do",
-  "socialSecurityNumber": "20261229-2397",
-  "email": "ja@doe.com"
+  "socialSecurityNumber": "20261230-2394",
+  "email": "jaja@doe.com"
 }
 
 ### Open Bank Account

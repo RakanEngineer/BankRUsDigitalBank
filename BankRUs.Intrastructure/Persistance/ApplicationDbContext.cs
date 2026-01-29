@@ -19,7 +19,7 @@ public class ApplicationDbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-
+        // BankAccount decimal precision        
         builder.Entity<BankAccount>(entity =>
         {
             entity.Property(e => e.Balance)
@@ -29,13 +29,19 @@ public class ApplicationDbContext
                 .IsUnique();
         });
 
-        //builder.Entity<ApplicationUser>()
-        //    .HasIndex(u => u.SocialSecurityNumber)
-        //    .IsUnique();
+        // Ensure SocialSecurityNumber is unique
+        builder.Entity<ApplicationUser>()
+            .HasIndex(u => u.SocialSecurityNumber)
+            .IsUnique();
 
-        //builder.Entity<ApplicationUser>()
-        //   .HasIndex(u => u.Email)
-        //   .IsUnique();
+        // Ensure Email is unique
+        builder.Entity<ApplicationUser>()
+           .HasIndex(u => u.Email)
+           .IsUnique();
+
+        //builder.Entity<BankAccount>()
+        //    .Property(b => b.Balance)
+        //    .HasPrecision(18, 2);
     }
 }
 
