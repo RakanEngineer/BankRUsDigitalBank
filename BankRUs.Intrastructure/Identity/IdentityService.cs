@@ -49,4 +49,18 @@ public class IdentityService : IIdentityService
 
         return new CreateUserResult(UserId: user.Id);
     }
+    public async Task<UserDto> GetUserByIdAsync(Guid userId)
+    {
+        var user = await _userManager.Users
+            .FirstOrDefaultAsync(u => u.Id == userId);
+
+        if (user == null)
+            throw new Exception("User not found");
+
+        return new UserDto(
+            UserId: userId,
+            Email: user.Email!,
+            FullName: $"{user.FirstName} {user.LastName}"
+        );
+    }
 }

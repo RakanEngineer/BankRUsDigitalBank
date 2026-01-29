@@ -33,12 +33,12 @@ namespace BankRUs.Intrastructure.Email
                 IsBodyHtml = true
             };
 
-            var client = new SmtpClient(_settings.Host, _settings.Port)
+            var smtpClient = new SmtpClient(_settings.Host, _settings.Port)
             {
                 DeliveryMethod = SmtpDeliveryMethod.Network
             };
 
-            await client.SendMailAsync(message);
+            await smtpClient.SendMailAsync(message);
         }
         public async Task SendAccountCreatedEmailAsync(string toEmail, string accountNumber)
         {

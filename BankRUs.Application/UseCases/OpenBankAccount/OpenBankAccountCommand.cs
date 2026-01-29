@@ -4,5 +4,5 @@ using System.Text;
 
 namespace BankRUs.Application.UseCases.OpenBankAccount
 {
-    public record OpenBankAccountCommand(Guid UserId);
+    public sealed record OpenBankAccountCommand(Guid UserId);
 }

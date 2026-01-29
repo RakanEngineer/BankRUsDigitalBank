@@ -11,23 +11,28 @@ namespace BankRUs.Application.UseCases.OpenBankAccount
     public class OpenBankAccountHandler
     {
         private readonly IBankAccountRepository _repo;
-        //private readonly IEmailService _emailService;
-        //private readonly IIdentityService _identityService;
-        public OpenBankAccountHandler(IBankAccountRepository repo)
-        {
-            _repo = repo;
-        }
-        //public OpenBankAccountHandler(
-        //IBankAccountRepository repo,
-        //IEmailService emailService,
-        //IIdentityService identityService)
+        private readonly IEmailService _emailService;
+        private readonly IIdentityService _identityService;
+        //public OpenBankAccountHandler(IBankAccountRepository repo)
         //{
         //    _repo = repo;
-        //    _emailService = emailService;
-        //    _identityService = identityService;
         //}
-        public async Task Handle(OpenBankAccountCommand command)
+        public OpenBankAccountHandler(
+        IBankAccountRepository repo,
+        IEmailService emailService,
+        IIdentityService identityService)
         {
+            _repo = repo;
+            _emailService = emailService;
+            _identityService = identityService;
+        }
+        public async Task<OpenBankAccountResult> HandleAsync(OpenBankAccountCommand command)
+        {
+            // TODO: Implementera HandleAsync
+
+            // SÄTT BREAKPOINT
+            //return new OpenBankAccountResult(Guid.NewGuid());
+
             var accountNumber = AccountNumberGenerator.Generate(); //
 
             var account = new BankAccount(
@@ -38,13 +43,19 @@ namespace BankRUs.Application.UseCases.OpenBankAccount
 
             await _repo.AddAsync(account);
 
-            //var user = await _identityService.GetUserByIdAsync(command.UserId);
+            var user = await _identityService.GetUserByIdAsync(command.UserId);
 
-            //await _emailService.SendAccountCreatedEmailAsync(
-            //    user.Email,
-            //    accountNumber
-            //);
-        }
-        
+            await _emailService.SendAccountCreatedEmailAsync(
+                user.Email,
+                accountNumber
+            );
+
+            return new OpenBankAccountResult(
+            account.Id,
+            account.AccountNumber,
+            account.Name,
+            account.Balance,
+            account.UserId);
+        }        
     }
 }

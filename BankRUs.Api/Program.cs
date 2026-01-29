@@ -8,6 +8,7 @@ using BankRUs.Intrastructure.Identity;
 using BankRUs.Intrastructure.Persistance;
 using BankRUs.Intrastructure.Persistance.Repositories;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,11 +31,26 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddControllers();
 
+// Command/Query handlers
 builder.Services.AddScoped<OpenAccountHandler>();
+builder.Services.AddScoped<OpenBankAccountHandler>();
+
+// Services
 builder.Services.AddScoped<IIdentityService, IdentityService>();
 
+if (builder.Environment.IsDevelopment())
+{
+    // Utveckling - Fake Email Service
+    builder.Services.AddScoped<IEmailService, SmtpEmailService>();
+}
+else
+{
+    // Produktion
+    //builder.Services.AddScoped<IEmailSender, EmailSender>();
+    //builder.Services.AddScoped<IEmailService, EmailSender>();
+}
+
 // Repository
-builder.Services.AddScoped<OpenBankAccountHandler>();
 builder.Services.AddScoped<IBankAccountRepository, BankAccountRepository>();
 
 // 3 typer av livslängder på objekt
@@ -50,8 +66,10 @@ builder.Services
 builder.Services.Configure<SmtpSettings>(
     builder.Configuration.GetSection("Smtp")
 );
-
-builder.Services.AddScoped<IEmailService, SmtpEmailService>();
+// Fake Email Service
+//builder.Services.AddScoped<IEmailService, SmtpEmailService>();
+//builder.Services.Configure<SmtpSettings>(
+//builder.Configuration.GetSection("SmtpSettings"));
 
 var app = builder.Build();
 

@@ -38,12 +38,12 @@ public class AccountsController : ControllerBase
         // Returnera 201 Created
         return Created(string.Empty, response);
     }
-    [HttpPost("/api/bank-accounts")]
-    public async Task<IActionResult> OpenBankAccount(OpenBankAccountCommand command)
-    {
-        await _handler.Handle(command);
-        return Ok();
-    }
+    //[HttpPost("/api/bank-accounts")]
+    //public async Task<IActionResult> OpenBankAccount(OpenBankAccountCommand command)
+    //{
+    //    await _handler.HandleAsync(command);
+    //    return Ok();
+    //}
 
     private static bool IsValidLuhn(string digits)
     {
