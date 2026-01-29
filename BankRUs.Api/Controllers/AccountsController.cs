@@ -20,16 +20,16 @@ public class AccountsController : ControllerBase
 
     // POST /api/accounts (Endpoint /  API endpoint)
     [HttpPost]
-    public async Task<IActionResult> Create(CreateAccountRequestDto requestDto)
+    public async Task<IActionResult> Create(CreateAccountRequestDto request)
     {
         // Tjocka vs Tunna controllers
 
         var openAccountResult = await _openAccountHandler.HandleAsync(
             new OpenAccountCommand(
-                FirstName: requestDto.FirstName,
-                LastName: requestDto.LastName,
-                SocialSecurityNumber: requestDto.SocialSecurityNumber,
-                Email: requestDto.Email));
+                FirstName: request.FirstName,
+                LastName: request.LastName,
+                SocialSecurityNumber: request.SocialSecurityNumber,
+                Email: request.Email));
 
         var response = new CreateAccountResponseDto(openAccountResult.UserId);
 

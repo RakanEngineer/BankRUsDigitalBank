@@ -13,7 +13,7 @@ namespace BankRUs.Intrastructure.Persistance.Repositories
             _context = context;
         }
 
-        public async Task AddAsync(BankAccount bankAccount)
+        public async Task CreateBankAccount(BankAccount bankAccount)
         {
             _context.BankAccounts.Add(bankAccount);
             await _context.SaveChangesAsync();

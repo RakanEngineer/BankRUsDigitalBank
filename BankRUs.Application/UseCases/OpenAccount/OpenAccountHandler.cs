@@ -55,7 +55,7 @@ public class OpenAccountHandler
             name: "Standardkonto"
         );
 
-        await _bankAccountRepository.AddAsync(bankAccount);
+        await _bankAccountRepository.CreateBankAccount(bankAccount);
         // TODO: Skicka välkomstmail till kund
         // Delegera till infrastructure
         // _emailSender.Send("Ditt bankkonto är nu redo!");

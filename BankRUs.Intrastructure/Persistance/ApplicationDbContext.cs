@@ -7,7 +7,7 @@ using System.Reflection.Emit;
 
 namespace BankRUs.Intrastructure.Persistance;
 
-public class ApplicationDbContext
+public sealed class ApplicationDbContext
     : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 {
     public ApplicationDbContext(

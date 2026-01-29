@@ -7,7 +7,7 @@ namespace BankRUs.Application.Repository
 {
     public interface IBankAccountRepository
     {
-        Task AddAsync(BankAccount account);
+        Task CreateBankAccount(BankAccount account);
         Task<BankAccount?> GetByAccountNumberAsync(string accountNumber);
         Task<IEnumerable<BankAccount>> GetByUserIdAsync(Guid userId);
     }

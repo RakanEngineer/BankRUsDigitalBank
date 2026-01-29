@@ -14,6 +14,7 @@ namespace BankRUs.Domain.Entities
         public string AccountNumber { get; private set; }
         [MaxLength(25)]
         public string Name { get; protected set; }
+        public bool IsLocked { get; protected set; }
         public decimal Balance { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public void Deposit(decimal amount, string reference) { }

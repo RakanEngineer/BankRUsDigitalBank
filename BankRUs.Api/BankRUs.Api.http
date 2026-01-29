@@ -17,10 +17,10 @@ POST https://localhost:8000/api/accounts
 Content-Type: application/json
 
 {
-  "firstName": "Ja",
-  "lastName": "Do",
-  "socialSecurityNumber": "20261230-2394",
-  "email": "jaja@doe.com"
+  "firstName": "Jaaa",
+  "lastName": "Doooo",
+  "socialSecurityNumber": "202612312385",
+  "email": "jaaa@doe.com"
 }
 
 ### Open Bank Account
@@ -29,5 +29,5 @@ POST https://localhost:8000/api/bank-accounts
 Content-Type: application/json
 
 {
-  "userId": "718cdcb6-123a-4a82-4867-08de5ecdaadc"
+  "userId": "84f4908a-9c90-4c61-6686-08de5f21bf8a"
 }
