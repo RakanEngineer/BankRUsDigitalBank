@@ -43,3 +43,6 @@ Payload
 
 Uppgift 4: Förhindra dubbletter (BONUS)
 För tillfället finns det inga begränsningar i databasen som förhindrar att samma kund registreras mer än en gång. Både personnummer och e-post behöver vara unikt i systemet. Uppdatera schemat för databasen så att dubbletter av personnummer och e-post inte tillåts för användare.
+-----------------------
+Install-Package Microsoft.AspNetCore.Authentication.JwtBearer
+ 
