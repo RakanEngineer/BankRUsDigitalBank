@@ -4,6 +4,7 @@ using System.Globalization;
 namespace BankRUs.Api.Attributes;
 
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter)]
+// Valideringsattribut för svenska personnummer (social security numbers).
 public class SwedishSocialSecurityNumberAttribute : ValidationAttribute
 {
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
