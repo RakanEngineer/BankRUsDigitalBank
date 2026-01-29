@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BankRUs.Application.UseCases.OpenBankAccount
 {
-    public class OpenBankAccountHandler
+    public sealed class OpenBankAccountHandler
     {
         private readonly IBankAccountRepository _repo;
         private readonly IEmailService _emailService;

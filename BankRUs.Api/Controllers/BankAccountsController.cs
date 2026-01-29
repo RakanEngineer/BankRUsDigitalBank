@@ -30,6 +30,7 @@ namespace BankRUs.Api.Controllers
                 Id: result.Id,
                 AccountNumber: result.AccountNumber,
                 Name: result.Name,
+                IsLocked: false,
                 Balance: result.Balance,
                 UserId: result.UserId
             );
