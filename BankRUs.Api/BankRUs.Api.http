@@ -11,6 +11,17 @@ Content-Type: application/json
   "socialSecurityNumber": "19900101-2013",
   "email": "jane@doe.com"
 }
+### Open Account
+
+POST https://localhost:8000/api/accounts
+Content-Type: application/json
+
+{
+  "firstName": "Ja",
+  "lastName": "Do",
+  "socialSecurityNumber": "20261229-2397",
+  "email": "ja@doe.com"
+}
 
 ### Open Bank Account
 

@@ -12,39 +12,31 @@ namespace BankRUs.Api.Controllers;
 public class AccountsController : ControllerBase
 {
     private readonly OpenAccountHandler _openAccountHandler;
-    private readonly OpenBankAccountHandler _handler;
 
-    public AccountsController(OpenAccountHandler openAccountHandler, OpenBankAccountHandler handler)
+    public AccountsController(OpenAccountHandler openAccountHandler)
     {
         _openAccountHandler = openAccountHandler;
-        _handler = handler;
     }
 
     // POST /api/accounts (Endpoint /  API endpoint)
     [HttpPost]
-    public async Task<IActionResult> Create(CreateAccountRequestDto request)
+    public async Task<IActionResult> Create(CreateAccountRequestDto requestDto)
     {
         // Tjocka vs Tunna controllers
 
         var openAccountResult = await _openAccountHandler.HandleAsync(
             new OpenAccountCommand(
-                FirstName: request.FirstName,
-                LastName: request.LastName,
-                SocialSecurityNumber: request.SocialSecurityNumber,
-                Email: request.Email));
+                FirstName: requestDto.FirstName,
+                LastName: requestDto.LastName,
+                SocialSecurityNumber: requestDto.SocialSecurityNumber,
+                Email: requestDto.Email));
 
         var response = new CreateAccountResponseDto(openAccountResult.UserId);
 
         // Returnera 201 Created
         return Created(string.Empty, response);
     }
-    //[HttpPost("/api/bank-accounts")]
-    //public async Task<IActionResult> OpenBankAccount(OpenBankAccountCommand command)
-    //{
-    //    await _handler.HandleAsync(command);
-    //    return Ok();
-    //}
-
+    
     private static bool IsValidLuhn(string digits)
     {
         var sum = 0;
