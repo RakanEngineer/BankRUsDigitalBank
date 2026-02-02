@@ -29,6 +29,11 @@ public sealed class ApplicationDbContext
                 .IsUnique();
         });
 
+        builder.Entity<BankAccount>().
+            HasOne<ApplicationUser>().
+            WithMany().
+            HasForeignKey(b => b.UserId);
+
         // Ensure SocialSecurityNumber is unique
         builder.Entity<ApplicationUser>()
             .HasIndex(u => u.SocialSecurityNumber)

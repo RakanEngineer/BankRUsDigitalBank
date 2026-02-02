@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankRUs.Intrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260129090315_UniqueUserConstraints")]
-    partial class UniqueUserConstraints
+    [Migration("20260202090411_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,9 @@ namespace BankRUs.Intrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsLocked")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -55,6 +58,8 @@ namespace BankRUs.Intrastructure.Migrations
 
                     b.HasIndex("AccountNumber")
                         .IsUnique();
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("BankAccounts");
                 });
@@ -273,6 +278,15 @@ namespace BankRUs.Intrastructure.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("BankRUs.Domain.Entities.BankAccount", b =>
+                {
+                    b.HasOne("BankRUs.Intrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

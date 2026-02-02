@@ -8,17 +8,19 @@ namespace BankRUs.Domain.Entities
 {
     public class BankAccount
     {
-        public Guid Id { get; private set; }
-        public Guid UserId { get; private set; }   // 🔗 // Foreign Key to ApplicationUser
+        // Det här är en entitet som inte finns i databasen
+        public Guid Id { get; protected set; }
+        public Guid UserId { get; protected set; }   // 🔗 // Foreign Key to ApplicationUser
         [MaxLength(25)]
-        public string AccountNumber { get; private set; }
+        public string AccountNumber { get; protected set; }
         [MaxLength(25)]
         public string Name { get; protected set; }
         public bool IsLocked { get; protected set; }
-        public decimal Balance { get; private set; }
-        public DateTime CreatedAt { get; private set; }
+        public decimal Balance { get; protected set; }
+        public DateTime CreatedAt { get; protected set; }
         public void Deposit(decimal amount, string reference) { }
         public void Withdraw(decimal amount, string reference) { }
+
         private BankAccount() { } // EF
 
         public BankAccount(Guid userId, string accountNumber, string name)

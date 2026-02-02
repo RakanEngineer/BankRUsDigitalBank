@@ -56,6 +56,8 @@ namespace BankRUs.Intrastructure.Migrations
                     b.HasIndex("AccountNumber")
                         .IsUnique();
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("BankAccounts");
                 });
 
@@ -273,6 +275,15 @@ namespace BankRUs.Intrastructure.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("BankRUs.Domain.Entities.BankAccount", b =>
+                {
+                    b.HasOne("BankRUs.Intrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

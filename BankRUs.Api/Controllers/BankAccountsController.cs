@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using BankRUs.Api.Dtos.BankAccounts;
+﻿using BankRUs.Api.Dtos.BankAccounts;
 using BankRUs.Application.UseCases.OpenBankAccount;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
